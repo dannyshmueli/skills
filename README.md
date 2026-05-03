@@ -1,40 +1,60 @@
-# Agent Skills
+# Danny's Agent Skills
 
-Agent Skills are folders of instructions, scripts, and resources that AI agents can discover and use to perform at specific tasks. Write once, use everywhere.
+Reusable skills for AI agents.
 
-Codex uses skills to help package capabilities that teams and individuals can use to complete specific tasks in a repeatable way. This repository catalogs skills for use and distribution with Codex.
+Install from this repo:
 
-Learn more:
-- [Using skills in Codex](https://developers.openai.com/codex/skills)
-- [Create custom skills in Codex](https://developers.openai.com/codex/skills/create-skill)
-- [Agent Skills open standard](https://agentskills.io)
-
-## Installing a skill
-
-Skills in [`.system`](skills/.system/) are automatically installed in the latest version of Codex.
-
-To install [curated](skills/.curated/) or [experimental](skills/.experimental/) skills, you can use the `$skill-installer` inside Codex.
-
-Curated skills can be installed by name (defaults to `skills/.curated`):
-
-```
-$skill-installer gh-address-comments
+```bash
+npx skills add dannyshmueli/skills --list
+npx skills add dannyshmueli/skills --skill negotiate
+npx skills add dannyshmueli/skills --skill image-zoom-qa
 ```
 
-For experimental skills, specify the skill folder. For example:
+Install all skills from this repo:
 
-```
-$skill-installer install the create-plan skill from the .experimental folder
-```
-
-Or provide the GitHub directory URL:
-
-```
-$skill-installer install https://github.com/openai/skills/tree/main/skills/.experimental/create-plan
+```bash
+npx skills add dannyshmueli/skills --all
 ```
 
-After installing a skill, restart Codex to pick up new skills.
+## Skills
+
+### negotiate
+
+Personal negotiation advisor with three modes:
+
+- `prep` - prepare before pricing or salary call
+- `live` - write response during negotiation
+- `analyze` - debrief outcome and bias map after call
+
+Covers pricing, commercial deals, freelance retainers, procurement, and salary negotiation. Uses BATNA, reservation point/red line, target price, ZOPA, anchoring, MESO packages, and cognitive-bias checks.
+
+Example:
+
+```text
+/negotiate prep
+I am negotiating salary for a Senior Product Manager role.
+Offer: 42,000 ILS monthly base + 0.15% options.
+Target: 49,000 ILS or equivalent total comp.
+Red line: 43,500 ILS if title/level and equity improve.
+BATNA: current role at 40,000 ILS plus one active interview.
+Variables: base, signing bonus, equity, title, remote days, 6-month review.
+```
+
+### image-zoom-qa
+
+Visual QA loop for AI-generated images, screenshots, UI, and video frames. Creates zoomed side-by-side crop boards so agents inspect exact regions instead of saying “close enough.”
+
+Example:
+
+```bash
+python3 -m pip install -r skills/.curated/image-zoom-qa/requirements.txt
+python3 skills/.curated/image-zoom-qa/scripts/image_zoom_qa.py \
+  --reference path/to/reference.png \
+  --current path/to/current.png \
+  --out image-zoom-qa \
+  --canvas-size 1080
+```
 
 ## License
 
-The license of an individual skill can be found directly inside the skill's directory inside the `LICENSE.txt` file.
+Each skill carries its own license file.

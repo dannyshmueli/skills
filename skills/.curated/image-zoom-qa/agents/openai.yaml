@@ -1,0 +1,4 @@
+interface:
+  display_name: "Image Zoom QA"
+  short_description: "Compare images with zoomed visual QA crops"
+  default_prompt: "Compare my generated visual artifact against the reference, create or inspect zoomed regions, and tell me the smallest next change to fix the mismatch."
