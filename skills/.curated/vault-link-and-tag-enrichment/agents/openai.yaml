@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vault Link & Tag Enrichment"
+  short_description: "Conservatively improve Obsidian/markdown vault wikilinks, backlinks, and tags"
+  default_prompt: "Run conservative vault link/tag enrichment on this markdown vault. Process a small batch, add only high-confidence links, keep frontmatter clean, and report needs-human proposals."

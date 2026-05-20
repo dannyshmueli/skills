@@ -1,16 +1,16 @@
-# Danny's Agent Skills
+# Danny Shmueli Skills
 
-Reusable skills for AI agents.
+Personal public skills for AI agents.
 
-Install from this repo:
+Install from the repo:
 
 ```bash
 npx skills add dannyshmueli/skills --list
-npx skills add dannyshmueli/skills --skill negotiate
+npx skills add dannyshmueli/skills --skill vault-link-and-tag-enrichment
 npx skills add dannyshmueli/skills --skill image-zoom-qa
 ```
 
-Install all skills from this repo:
+Install all:
 
 ```bash
 npx skills add dannyshmueli/skills --all
@@ -18,43 +18,62 @@ npx skills add dannyshmueli/skills --all
 
 ## Skills
 
-### negotiate
+### `vault-link-and-tag-enrichment`
 
-Personal negotiation advisor with three modes:
+Conservative Obsidian / markdown vault enrichment for agents.
 
-- `prep` - prepare before pricing or salary call
-- `live` - write response during negotiation
-- `analyze` - debrief outcome and bias map after call
+Use it to improve wikilinks, backlinks, and tags without turning your graph into keyword soup or stuffing machine telemetry into frontmatter.
 
-Covers pricing, commercial deals, freelance retainers, procurement, and salary negotiation. Uses BATNA, reservation point/red line, target price, ZOPA, anchoring, MESO packages, and cognitive-bias checks.
+Good for:
 
-Example:
+- Obsidian vaults
+- LLM Wiki-style markdown knowledge bases
+- cron-based small-batch enrichment
+- cleaning noisy scan frontmatter
+- deciding whether a proposed wikilink should be kept, added, removed, replaced, or sent to human review
+
+Core rule: optimize future comprehension, not graph density.
+
+### `image-zoom-qa`
+
+Iterative Zoom QA for visual comparison.
+
+Use it when an AI agent says an image “looks close,” but small details matter: logos, shadows, seams, icons, text, alignment, or UI polish.
+
+The skill includes a deterministic crop-board script so agents compare suspicious regions side-by-side instead of handwaving from a full-frame screenshot.
+
+## Repo layout
 
 ```text
-/negotiate prep
-I am negotiating salary for a Senior Product Manager role.
-Offer: 42,000 ILS monthly base + 0.15% options.
-Target: 49,000 ILS or equivalent total comp.
-Red line: 43,500 ILS if title/level and equity improve.
-BATNA: current role at 40,000 ILS plus one active interview.
-Variables: base, signing bonus, equity, title, remote days, 6-month review.
+skills/.curated/
+  vault-link-and-tag-enrichment/
+    SKILL.md
+    references/
+  image-zoom-qa/
+    SKILL.md
+    scripts/image_zoom_qa.py
+    references/example-regions.json
+    assets/images/
 ```
 
-### image-zoom-qa
+## Development
 
-Visual QA loop for AI-generated images, screenshots, UI, and video frames. Creates zoomed side-by-side crop boards so agents inspect exact regions instead of saying “close enough.”
-
-Example:
+List local skills:
 
 ```bash
-python3 -m pip install -r skills/.curated/image-zoom-qa/requirements.txt
-python3 skills/.curated/image-zoom-qa/scripts/image_zoom_qa.py \
-  --reference path/to/reference.png \
-  --current path/to/current.png \
-  --out image-zoom-qa \
-  --canvas-size 1080
+npx --yes skills add . --list
 ```
+
+Install one from local checkout for testing:
+
+```bash
+TMP=$(mktemp -d)
+cd "$TMP"
+npx --yes skills add /Users/danny/dev/skills --skill vault-link-and-tag-enrichment --agent codex -y --copy
+```
+
+This repository is Danny's fork of the OpenAI skills catalog. Keep the root README focused on Danny's curated additions first, and keep public skills under `skills/.curated/<skill-name>/`.
 
 ## License
 
-Each skill carries its own license file.
+MIT
