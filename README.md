@@ -2,10 +2,19 @@
 
 Personal public skills for AI agents.
 
-Install from the repo:
+This repo is intentionally small. It contains the skills I want to maintain and invest in, not a mirror of the upstream skills catalog.
+
+## Install
+
+List available skills:
 
 ```bash
 npx skills add dannyshmueli/skills --list
+```
+
+Install one skill:
+
+```bash
 npx skills add dannyshmueli/skills --skill vault-link-and-tag-enrichment
 npx skills add dannyshmueli/skills --skill image-zoom-qa
 ```
@@ -48,9 +57,11 @@ The skill includes a deterministic crop-board script so agents compare suspiciou
 skills/.curated/
   vault-link-and-tag-enrichment/
     SKILL.md
+    README.md
     references/
   image-zoom-qa/
     SKILL.md
+    README.md
     scripts/image_zoom_qa.py
     references/example-regions.json
     assets/images/
@@ -72,7 +83,11 @@ cd "$TMP"
 npx --yes skills add /Users/danny/dev/skills --skill vault-link-and-tag-enrichment --agent codex -y --copy
 ```
 
-This repository is Danny's fork of the OpenAI skills catalog. Keep the root README focused on Danny's curated additions first, and keep public skills under `skills/.curated/<skill-name>/`.
+Before pushing, verify:
+
+```bash
+npx --yes skills add . --list
+```
 
 ## License
 

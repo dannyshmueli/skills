@@ -1,4 +1,0 @@
-interface:
-  display_name: "Negotiate"
-  short_description: "Prep, live, and analyze negotiation advisor"
-  default_prompt: "Help me prepare for, respond during, or analyze a pricing or salary negotiation using BATNA, red line, target, MESO packages, and bias checks."
